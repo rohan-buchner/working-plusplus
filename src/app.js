@@ -97,7 +97,11 @@ const handleGet = async( request, response ) => {
       }
       break;
 
-    // A simple default GET response is sometimes useful for troubleshooting.
+    case '/reset':
+      response.send( await leaderboard.reset() );
+      break;
+
+      // A simple default GET response is sometimes useful for troubleshooting.
     default:
       response.send( 'It works! However, this app only accepts POST requests for now.' );
       break;

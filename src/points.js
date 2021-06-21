@@ -93,7 +93,29 @@ const updateScore = async( item, operation ) => {
 
 }; // UpdateScore.
 
+/**
+ * Resets the leaderboard
+ */
+const resetAll = async() => {
+
+  // Connect to the DB, and create a table if it's not yet there.
+  // We also set up the citext extension, so that we can easily be case insensitive.
+  const dbClient = await postgres.connect();
+  await dbClient.query( '\
+    CREATE EXTENSION IF NOT EXISTS citext; \
+    CREATE TABLE IF NOT EXISTS ' + scoresTableName + ' (item CITEXT PRIMARY KEY, score INTEGER); \
+  ' );
+
+  // Atomically record the action.
+  // TODO: Fix potential SQL injection issues here, even though we know the input should be safe.
+  await dbClient.query( 'UPDATE ' + scoresTableName + ' SET score = 0' );
+
+  await dbClient.release();
+  return 0;
+};
+
 module.exports = {
   retrieveTopScores,
+  resetAll,
   updateScore
 };

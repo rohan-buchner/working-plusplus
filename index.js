@@ -55,6 +55,7 @@ const bootstrap = ( options = {}) => {
 
   // Additional routes.
   server.get( '/leaderboard', app.handleGet );
+  server.get( '/reset', app.handleGet );
 
   return server.listen( PORT, () => {
     console.log( 'Listening on port ' + PORT + '.' );

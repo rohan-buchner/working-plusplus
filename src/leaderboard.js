@@ -137,7 +137,7 @@ const getForSlack = async( event, request ) => {
 
   const messageText = (
     'Here you go. ' +
-    'Or see the <' + getLeaderboardUrl( request ) + '|whole list>.'
+        'Or see the <' + getLeaderboardUrl( request ) + '|whole list>.'
   );
 
   const message = {
@@ -199,10 +199,18 @@ const handler = async( event, request ) => {
   return getForSlack( event, request );
 };
 
+/**
+ * Resets the leaderboard
+ */
+const reset = async() => {
+  await points.resetAll();
+};
+
 module.exports = {
   getLeaderboardUrl,
   rankItems,
   getForSlack,
   getForWeb,
+  reset,
   handler
 };

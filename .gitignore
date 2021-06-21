@@ -5,3 +5,8 @@ node_modules
 package-lock.json
 .coveralls.yml
 .env
+/.idea/.gitignore
+/.idea/modules.xml
+/.idea/inspectionProfiles/Project_Default.xml
+/.idea/vcs.xml
+/.idea/working-plusplus.iml
